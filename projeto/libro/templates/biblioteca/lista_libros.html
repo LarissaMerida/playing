@@ -1,0 +1,27 @@
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Lista Libros por Autor</h1>
+
+        <table style =" border: solid; text-align:center">
+            <thead>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Autor</th>
+            </thead>
+            <tbody>
+                {% for l in libros %}
+                    <tr > 
+                        <td> {{ l.id }} </td>
+                        <td> {{ l.title }} </td>
+                        <td> {{ l.autor.nombre }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+    </body>
+</html>
