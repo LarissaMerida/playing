@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive maps for Django web apps</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+  </head>
+  <body>
+    <h1>MAP</h1>
+   
+    <div id='map' style='width: 800px; height: 500px;'></div>
+    <!-- <script>
+      mapboxgl.accessToken ='pk.eyJ1IjoibGFyaXNzYW1lcmlkYSIsImEiOiJjanlldWtsdmQxNXFyM21wcjM5eXhleXplIn0.Q4QdwFzrcGWehs5SRvuNYg';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/dark-v10',
+        center: [-79.999732, 40.4374],
+        zoom: 11
+      });
+  
+     // we will add more code here in the next steps
+  
+    </script> -->
+    <script>
+        // mapbox token
+        mapboxgl.accessToken = 'pk.eyJ1IjoibGFyaXNzYW1lcmlkYSIsImEiOiJjanlldWtsdmQxNXFyM21wcjM5eXhleXplIn0.Q4QdwFzrcGWehs5SRvuNYg';
+        // parse passed multipolygon geojson string
+        var multipolygon = JSON.parse('{{ multipolygon | safe }}');
+        // show map
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: [-2.1580, 51.9923],
+            zoom: 12
+        });
+        // show geojson multipolygon on mapbox
+        map.on('load', function () {
+            map.addLayer({
+                'id': '0',
+                'type': 'fill',
+                'source': {
+                    'type': 'geojson',
+                    'data': multipolygon
+                },
+                'paint': {
+                    'fill-color': '#00f',
+                    'fill-opacity': 0.8
+                }
+            });
+        });
+    </script>
+  </body>
+</html>
